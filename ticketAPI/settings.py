@@ -68,6 +68,9 @@ REST_FRAMEWORK = {
     ),
 }
 
+# Allow cors origin
+CORS_ORIGIN_ALLOW_ALL = True
+
 JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'ticketAPI.utils.my_jwt_response_handler'
 }
