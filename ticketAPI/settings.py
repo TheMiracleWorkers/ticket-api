@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'api',
-    'core.apps.CoreConfig',
 ]
 
 MIDDLEWARE = [
@@ -72,7 +71,7 @@ REST_FRAMEWORK = {
 CORS_ORIGIN_ALLOW_ALL = True
 
 JWT_AUTH = {
-    'JWT_RESPONSE_PAYLOAD_HANDLER': 'ticketAPI.utils.my_jwt_response_handler'
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'ticketAPI.utils.jwt_response_handler'
 }
 
 ROOT_URLCONF = 'ticketAPI.urls'
