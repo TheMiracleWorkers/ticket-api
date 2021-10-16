@@ -33,7 +33,7 @@ class TicketViewSet(viewsets.ModelViewSet):
     queryset = Ticket.objects.all()
     serializer_class = TicketSerializer
     permission_classes = []
-
+    filterset_fields = ['title', 'description', 'due_date', 'created_at', 'updated_at']
 
 class CurrentUserViewSet(viewsets.ModelViewSet):
     queryset = CurrentUser.objects.all()
@@ -43,3 +43,4 @@ class CurrentUserViewSet(viewsets.ModelViewSet):
     def list(self, request, *args, **kwargs):
         serializer = CurrentUserSerializer(request.user)
         return Response(serializer.data)
+
