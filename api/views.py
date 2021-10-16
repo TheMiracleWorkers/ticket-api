@@ -31,3 +31,4 @@ class TicketViewSet(viewsets.ModelViewSet):
     queryset = Ticket.objects.all()
     serializer_class = TicketSerializer
     permission_classes = []
+    filterset_fields = ['title', 'description', 'due_date', 'created_at', 'updated_at']
