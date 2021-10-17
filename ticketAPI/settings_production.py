@@ -27,7 +27,8 @@ SECRET_KEY = 'django-insecure-&^46jcj7^)bo6n7ihn3%=9pb4g5@qne%na4%ijyax@_88#o8x!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['sheltered-bastion-53879.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['sheltered-bastion-53879.herokuapp.com',
+                 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -44,8 +45,8 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework',
     'corsheaders',
-  
-    # project 
+
+    # project
     'api',
 ]
 
@@ -83,8 +84,7 @@ ROOT_URLCONF = 'ticketAPI.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -104,10 +104,23 @@ WSGI_APPLICATION = 'ticketAPI.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
+
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+
+        'NAME': 'd2hglnvr94q6d6',
+
+        'USER': 'gsipczicmwfszu',
+
+        'PASSWORD': '98ddf088385c3ac79e6394ace4d9cdfa2783c97247d757d49e57cd505174901e',
+
+        'HOST': 'ec2-44-197-142-172.compute-1.amazonaws.com',
+
+        'PORT': '5432',
+
     }
+
 }
 
 
@@ -157,4 +170,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
-
