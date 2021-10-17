@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-&^46jcj7^)bo6n7ihn3%=9pb4g5@qne%na4%ijyax@_88#o8x!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['derekmeuwissen.pythonanywhere.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['sheltered-bastion-53879.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
