@@ -5,7 +5,7 @@ from rest_framework_jwt.serializers import User
 class Ticket(models.Model):
     title = models.CharField(max_length=250)
     description = models.TextField(default='')
-    due_date = models.DateTimeField(blank=True)
+    due_date = models.DateTimeField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
