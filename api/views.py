@@ -3,7 +3,7 @@ from rest_framework import viewsets
 from rest_framework import permissions
 
 from .models import Ticket, CurrentUser
-from .serializers import UserSerializer, GroupSerializer, TicketSerializer, CurrentUserSerializer
+from .serializers import UserSerializer, GroupSerializer, TicketSerializer
 
 from rest_framework.response import Response
 
@@ -38,10 +38,10 @@ class TicketViewSet(viewsets.ModelViewSet):
 
 class CurrentUserViewSet(viewsets.ModelViewSet):
     queryset = CurrentUser.objects.all()
-    serializer_class = CurrentUserSerializer
+    serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def list(self, request, *args, **kwargs):
-        serializer = CurrentUserSerializer(request.user)
+        serializer = UserSerializer(request.user, context={'request': request})
         return Response(serializer.data)
 
