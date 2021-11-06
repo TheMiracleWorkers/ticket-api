@@ -3,7 +3,7 @@ from rest_framework import viewsets
 from rest_framework import permissions
 
 from .models import Ticket, CurrentUser
-from .serializers import UserSerializer, GroupSerializer, TicketSerializer
+from .serializers import UserSerializer, RoleSerializer, TicketSerializer, RegisterSerializer
 
 from rest_framework.response import Response
 
@@ -17,12 +17,12 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class GroupViewSet(viewsets.ModelViewSet):
+class RoleViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
     """
     queryset = Group.objects.all()
-    serializer_class = GroupSerializer
+    serializer_class = RoleSerializer
     permission_classes = [permissions.IsAuthenticated]
 
 
@@ -45,3 +45,8 @@ class CurrentUserViewSet(viewsets.ModelViewSet):
         serializer = UserSerializer(request.user, context={'request': request})
         return Response(serializer.data)
 
+
+class RegisterViewSet(viewsets.ModelViewSet):
+    queryset = CurrentUser.objects.all()
+    serializer_class = RegisterSerializer
+    permission_classes = []

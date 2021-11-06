@@ -1,13 +1,14 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
+from rest_framework.validators import UniqueValidator
+from django.contrib.auth.password_validation import validate_password
 
 from api.models import Ticket
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
 
-    token = serializers.SerializerMethodField()
     password = serializers.CharField(write_only=True)
 
     def get_token(self, obj):
@@ -28,12 +29,13 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = User
-        fields = ['url', 'token', 'username', 'password', 'email']
+        fields = ['url', 'username', 'password', 'email', 'groups']
 
 
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
+class RoleSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Group
+        verbose_name = 'role'
         fields = ['url', 'name']
 
 
@@ -41,3 +43,27 @@ class TicketSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Ticket
         fields = ['id', 'title', 'description', 'due_date', 'created_at', 'updated_at']
+
+
+class RegisterSerializer(serializers.HyperlinkedModelSerializer):
+    email = serializers.EmailField(
+        required=True,
+        validators=[UniqueValidator(queryset=User.objects.all())]
+    )
+
+    password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
+
+    def create(self, validated_data):
+        user = User.objects.create(
+            username=validated_data['username'],
+            email=validated_data['email']
+        )
+
+        user.set_password(validated_data['password'])
+        user.save()
+
+        return user
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password')
