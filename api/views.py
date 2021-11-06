@@ -2,7 +2,7 @@ from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
 
-from .models import Ticket, CurrentUser
+from .models import Ticket, RegisterUser, CurrentUser
 from .serializers import UserSerializer, RoleSerializer, TicketSerializer, RegisterSerializer
 
 from rest_framework.response import Response
@@ -47,6 +47,6 @@ class CurrentUserViewSet(viewsets.ModelViewSet):
 
 
 class RegisterViewSet(viewsets.ModelViewSet):
-    queryset = CurrentUser.objects.all()
+    queryset = RegisterUser.objects.none()
     serializer_class = RegisterSerializer
     permission_classes = []
