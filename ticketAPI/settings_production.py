@@ -113,7 +113,7 @@ DATABASES = {
 
         'USER': 'gsipczicmwfszu',
 
-        'PASSWORD': '98ddf088385c3ac79e6394ace4d9cdfa2783c97247d757d49e57cd505174901e',
+        'PASSWORD': os.environ['DATABASE_PASSWORD'],
 
         'HOST': 'ec2-44-197-142-172.compute-1.amazonaws.com',
 
