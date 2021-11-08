@@ -2,7 +2,7 @@ from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
 
-from api.models import Ticket
+from api.models import Project, Ticket
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -17,10 +17,18 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['url', 'name']
 
 
+class ProjectSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Project
+        fields = ['id', 'name']
+        read_only = ['tickets']
+
+
 class TicketSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Ticket
-        fields = ['id', 'title', 'description', 'due_date', 'created_at', 'updated_at']
+        fields = ['id', 'title', 'description',
+                  'due_date', 'project', 'created_at', 'updated_at']
 
 
 class CurrentUserSerializer(serializers.HyperlinkedModelSerializer):
