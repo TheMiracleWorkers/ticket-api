@@ -5,9 +5,9 @@ class Project(models.Model):
     name = models.CharField(max_length=60)
 
 PRIORITY_CHOICES = (
-    ('HIGH', '1'),
-    ('MEDIUM', '2'),
-    ('LOW', '3'),
+    ('HIGH', 1),
+    ('MEDIUM', 2),
+    ('LOW', 3),
     )
 
 class Ticket(models.Model):
