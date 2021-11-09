@@ -75,7 +75,9 @@ REST_FRAMEWORK = {
 CORS_ORIGIN_ALLOW_ALL = True
 
 JWT_AUTH = {
-    'JWT_RESPONSE_PAYLOAD_HANDLER': 'ticketAPI.utils.jwt_response_handler'
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'ticketAPI.utils.jwt_response_handler',
+    'JWT_PAYLOAD_HANDLER': 'rest_framework_jwt.utils.jwt_payload_handler',
+    'JWT_ALLOW_REFRESH': True,
 }
 
 ROOT_URLCONF = 'ticketAPI.urls'

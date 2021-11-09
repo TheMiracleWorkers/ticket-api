@@ -1,7 +1,7 @@
 from django.urls import path, include
 from rest_framework_nested import routers
 
-from .views import UserViewSet, GroupViewSet, TicketViewSet, CurrentUserViewSet, RegisterViewSet, ProjectViewSet
+from .views import UserViewSet, RoleViewSet, TicketViewSet, CurrentUserViewSet, RegisterViewSet, ProjectViewSet
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
