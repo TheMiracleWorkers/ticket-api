@@ -4,10 +4,11 @@ from rest_framework_jwt.serializers import User
 class Project(models.Model):
     name = models.CharField(max_length=60)
 
+
 class PRIORITY_CHOICES(models.IntegerChoices):
         HIGH = 1
         MEDIUM = 2
-        LOW = 3       
+        LOW = 3
 
 class Ticket(models.Model):
     title = models.CharField(max_length=250)
