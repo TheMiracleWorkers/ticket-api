@@ -2,7 +2,7 @@ from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
 
-from api.models import Project, Ticket
+from api.models import Project, Ticket, Priority_CHOICES
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -28,7 +28,7 @@ class TicketSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Ticket
         fields = ['id', 'title', 'description',
-                  'due_date', 'project', 'created_at', 'updated_at']
+                  'due_date', 'project', 'priority', 'created_at', 'updated_at']
 
 
 class CurrentUserSerializer(serializers.HyperlinkedModelSerializer):
