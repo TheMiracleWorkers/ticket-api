@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets, generics
 from rest_framework import permissions
+from rest_framework.decorators import action
 
 
 from .models import Ticket, CurrentUser, Project
@@ -29,7 +30,7 @@ class GroupViewSet(viewsets.ModelViewSet):
 
 class TicketViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows groups to be viewed or edited.
+    API endpoint that allows tickets to be viewed or edited.
     """
     queryset = Ticket.objects.all()
     serializer_class = TicketSerializer
@@ -39,10 +40,21 @@ class TicketViewSet(viewsets.ModelViewSet):
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows tickets to be viewed or edited.   
+    """
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
     permission_classes = []
     filterset_fields = ['name']
+
+    @action(methods=['delete'], detail=True)
+    def remove_members(self, request, pk=None):
+        project = self.get_object()
+        members_to_remove = request.data['members']
+        for member in members_to_remove:
+            project.members.remove(member)
+        return Response(ProjectSerializer(project).data)
 
 
 class CurrentUserViewSet(viewsets.ModelViewSet):

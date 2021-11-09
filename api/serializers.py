@@ -5,10 +5,19 @@ from rest_framework_jwt.settings import api_settings
 from api.models import Project, Ticket
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+
+
+class TicketSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Ticket
+        fields = ['id', 'title', 'description',
+                  'due_date', 'project', 'created_at', 'updated_at']
+
+
+class UserSerializer(serializers.HyperlinkedModelSerializer):    
     class Meta:
         model = User
-        fields = ['url', 'username', 'email', 'groups']
+        fields = ['url', 'username', 'email']        
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
@@ -17,18 +26,13 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['url', 'name']
 
 
-class ProjectSerializer(serializers.HyperlinkedModelSerializer):
+class ProjectSerializer(serializers.ModelSerializer):
+    members = UserSerializer(many=True, read_only=True)
+    owner = UserSerializer(read_only=True)
     class Meta:
         model = Project
-        fields = ['id', 'name']
-        read_only = ['tickets']
-
-
-class TicketSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Ticket
-        fields = ['id', 'title', 'description',
-                  'due_date', 'project', 'created_at', 'updated_at']
+        fields = ['id', 'name', 'owner', 'members']
+        read_only = ['tickets']        
 
 
 class CurrentUserSerializer(serializers.HyperlinkedModelSerializer):
