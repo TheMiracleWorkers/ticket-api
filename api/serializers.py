@@ -50,7 +50,7 @@ class TicketSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Ticket
         fields = ['id', 'title', 'description',
-                  'due_date', 'project', 'created_at', 'updated_at']
+                  'due_date', 'project', 'priority', 'created_at', 'updated_at']
 
 
 class RegisterSerializer(serializers.HyperlinkedModelSerializer):

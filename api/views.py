@@ -34,7 +34,7 @@ class TicketViewSet(viewsets.ModelViewSet):
     serializer_class = TicketSerializer
     permission_classes = []
     filterset_fields = ['title', 'description',
-                        'due_date', 'project', 'created_at', 'updated_at']
+                        'due_date', 'project', 'priority','created_at', 'updated_at']
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
