@@ -23,3 +23,7 @@ class Ticket(models.Model):
 
 class CurrentUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+
+class RegisterUser(models.Model):
+    user = ""
