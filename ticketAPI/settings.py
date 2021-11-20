@@ -82,7 +82,7 @@ JWT_AUTH = {
     'JWT_PAYLOAD_HANDLER': 'rest_framework_jwt.utils.jwt_payload_handler',
     'JWT_ALLOW_REFRESH': True,
     'AUTH_HEADER_TYPES': 'JWT',
-    'JWT_EXPIRATION_DELTA': timedelta(minutes=5),
+    'JWT_EXPIRATION_DELTA': timedelta(minutes=20),
 }
 
 ROOT_URLCONF = 'ticketAPI.urls'
