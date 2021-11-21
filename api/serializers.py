@@ -29,7 +29,8 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'url', 'username', 'password', 'email', 'groups', 'last_login', 'date_joined']
+        fields = ['id', 'url', 'username', 'password',
+                  'email', 'groups', 'last_login', 'date_joined']
 
 
 class RoleSerializer(serializers.HyperlinkedModelSerializer):
@@ -46,11 +47,19 @@ class ProjectSerializer(serializers.HyperlinkedModelSerializer):
         read_only = ['tickets']
 
 
-class TicketSerializer(serializers.HyperlinkedModelSerializer):
+class TicketSerializer(serializers.ModelSerializer):
+    project_name = serializers.SerializerMethodField('get_project_name')
+
+    def get_project_name(self, ticket):
+        if ticket.project:
+            return ticket.project.name
+        else:
+            return 'No Project'
+
     class Meta:
         model = Ticket
         fields = ['id', 'title', 'description',
-                  'due_date', 'project', 'priority', 'created_at', 'updated_at']
+                  'due_date', 'project', 'project_name', 'priority', 'created_at', 'updated_at']
 
 
 class RegisterSerializer(serializers.HyperlinkedModelSerializer):
@@ -59,7 +68,8 @@ class RegisterSerializer(serializers.HyperlinkedModelSerializer):
         validators=[UniqueValidator(queryset=User.objects.all())]
     )
 
-    password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
+    password = serializers.CharField(
+        write_only=True, required=True, validators=[validate_password])
 
     def create(self, validated_data):
         user = User.objects.create(
