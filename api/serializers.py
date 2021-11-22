@@ -4,7 +4,7 @@ from rest_framework_jwt.settings import api_settings
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
 
-from api.models import Project, Ticket, Status
+from api.models import Project, Ticket
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -34,13 +34,6 @@ class ProjectSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Project
         fields = ['id', 'name']
-        read_only = ['tickets']
-
-
-class StatusSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Status
-        fields = ['id', 'status']
         read_only = ['tickets']
 
 
