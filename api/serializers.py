@@ -4,11 +4,11 @@ from rest_framework_jwt.settings import api_settings
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
 
-from api.models import Project, Ticket
+from api.models import Project, Ticket, Status
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    
+
     def get_token(self, obj):
         jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
         jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
@@ -19,7 +19,8 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'url', 'username', 'email', 'groups', 'last_login', 'date_joined']
+        fields = ['id', 'url', 'username', 'email',
+                  'groups', 'last_login', 'date_joined']
 
 
 class RoleSerializer(serializers.HyperlinkedModelSerializer):
@@ -36,6 +37,13 @@ class ProjectSerializer(serializers.HyperlinkedModelSerializer):
         read_only = ['tickets']
 
 
+class StatusSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Status
+        fields = ['id', 'status']
+        read_only = ['tickets']
+
+
 class TicketSerializer(serializers.ModelSerializer):
     project_name = serializers.SerializerMethodField('get_project_name')
 
@@ -48,7 +56,7 @@ class TicketSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
         fields = ['id', 'title', 'description',
-                  'due_date', 'project', 'project_name', 'priority', 'created_at', 'updated_at']
+                  'due_date', 'project', 'project_name', 'status', 'priority', 'created_at', 'updated_at']
 
 
 class RegisterSerializer(serializers.HyperlinkedModelSerializer):

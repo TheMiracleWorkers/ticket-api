@@ -2,8 +2,8 @@ from django.contrib.auth.models import User, Group
 from rest_framework import viewsets, generics
 from rest_framework import permissions
 
-from .models import Ticket, RegisterUser, CurrentUser, Project
-from .serializers import ProjectSerializer, UserSerializer, RoleSerializer, TicketSerializer, RegisterSerializer
+from .models import Status, Ticket, RegisterUser, CurrentUser, Project
+from .serializers import ProjectSerializer, StatusSerializer, UserSerializer, RoleSerializer, TicketSerializer, RegisterSerializer
 
 from rest_framework.response import Response
 
@@ -34,7 +34,7 @@ class TicketViewSet(viewsets.ModelViewSet):
     serializer_class = TicketSerializer
     permission_classes = []
     filterset_fields = ['title', 'description',
-                        'due_date', 'project', 'priority', 'created_at', 'updated_at']
+                        'due_date', 'project', 'status', 'priority', 'created_at', 'updated_at']
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
@@ -42,6 +42,13 @@ class ProjectViewSet(viewsets.ModelViewSet):
     serializer_class = ProjectSerializer
     permission_classes = []
     filterset_fields = ['name']
+
+
+class StatusViewSet(viewsets.ModelViewSet):
+    queryset = Status.objects.all()
+    serializer_class = StatusSerializer
+    permission_classes = []
+    filterset_fields = ['status']
 
 
 class CurrentUserViewSet(viewsets.ModelViewSet):
