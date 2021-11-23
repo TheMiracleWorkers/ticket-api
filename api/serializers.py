@@ -8,7 +8,7 @@ from api.models import Project, Ticket
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    
+
     def get_token(self, obj):
         jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
         jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
@@ -19,7 +19,8 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'url', 'username', 'email', 'groups', 'last_login', 'date_joined']
+        fields = ['id', 'url', 'username', 'email',
+                  'groups', 'last_login', 'date_joined']
 
 
 class RoleSerializer(serializers.HyperlinkedModelSerializer):
@@ -48,7 +49,7 @@ class TicketSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
         fields = ['id', 'title', 'description',
-                  'due_date', 'project', 'project_name', 'priority', 'created_at', 'updated_at']
+                  'due_date', 'project', 'project_name', 'status', 'priority', 'created_at', 'updated_at']
 
 
 class RegisterSerializer(serializers.HyperlinkedModelSerializer):
