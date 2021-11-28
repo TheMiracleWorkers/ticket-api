@@ -39,17 +39,23 @@ class ProjectSerializer(serializers.HyperlinkedModelSerializer):
 
 class TicketSerializer(serializers.ModelSerializer):
     project_name = serializers.SerializerMethodField('get_project_name')
-
+    assigned_username = serializers.SerializerMethodField('get_assigned_username')
+    
     def get_project_name(self, ticket):
         if ticket.project:
             return ticket.project.name
         else:
             return 'No Project'
+    def get_assigned_username(self, ticket):
+        if ticket.assigned_user:
+           return ticket.assigned_user.username 
+        else:
+            return 'No User'
 
     class Meta:
         model = Ticket
         fields = ['id', 'title', 'description',
-                  'due_date', 'project', 'project_name', 'status', 'priority', 'created_at', 'updated_at']
+                  'due_date', 'project', 'project_name', 'status', 'priority', 'assigned_user', 'assigned_username','created_at', 'updated_at']
 
 
 class RegisterSerializer(serializers.HyperlinkedModelSerializer):

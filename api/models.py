@@ -20,6 +20,8 @@ class Ticket(models.Model):
         Project, on_delete=models.CASCADE, null=True, related_name='tickets', related_query_name='ticket')
     status = models.CharField(max_length=40, default='Unassigned')
     priority = models.IntegerField(choices=PRIORITY_CHOICES.choices, default=1)
+    assigned_user = models.ForeignKey(
+        User, on_delete=models.CASCADE, null=True, related_name='tickets', related_query_name='ticketuser')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
