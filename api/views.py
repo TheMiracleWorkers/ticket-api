@@ -40,7 +40,7 @@ class TicketViewSet(viewsets.ModelViewSet):
 class ProjectViewSet(viewsets.ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
-    permission_classes = []
+    permission_classes = [permissions.IsAuthenticated]
     filterset_fields = ['name']
 
 
