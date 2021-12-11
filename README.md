@@ -6,8 +6,7 @@
     A Django API for the ticket tracker application.
 </p>
 
-<p align="center">
-	[![Status](https://github.com/TheMiracleWorkers/ticket-api/actions/workflows/heroku_deploy.yml/badge.svg?branch=main)](https://github.com/TheMiracleWorkers/ticket-api/actions/workflows/heroku_deploy.yml)
+<p align="center">	
 	<a href="https://github.com/TheMiracleWorkers/ticket-api/tags"><img src="https://img.shields.io/badge/release-v1-blue" alt="Version badge"></a>
 	<a href="https://github.com/TheMiracleWorkers/ticket-api/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License badge"></a>
 </p>
